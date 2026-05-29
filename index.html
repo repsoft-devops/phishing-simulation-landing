@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyRepsoft Security Reminder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <div class="logo-wrap">
+        <img src="assets/myrepsoft-logo.png" alt="MyRepsoft Logo" class="logo" />
+      </div>
+
+      <div class="badge">Security Awareness Simulation</div>
+
+      <h1>This was a phishing simulation reminder.</h1>
+
+      <p class="lead">
+        You clicked a link from an email that appeared to require review of a company document or agreement.
+        This page is part of MyRepsoft's internal Security Awareness Training activity.
+      </p>
+
+      <div class="warning-box">
+        <h2>Important Security Reminder</h2>
+        <p>
+          Before clicking links in emails, always check the sender, the message context, the URL, and whether the request is expected.
+          Attackers often use urgent or official-looking messages to trick users into clicking links.
+        </p>
+      </div>
+
+      <div class="steps">
+        <h2>What you should do next time</h2>
+        <ol>
+          <li>Check if the sender address is expected and legitimate.</li>
+          <li>Do not click links from suspicious or unexpected emails.</li>
+          <li>Do not enter passwords, MFA codes, or company information on unknown pages.</li>
+          <li>Report suspicious emails immediately to <strong>security@myrepsoft.com</strong>.</li>
+        </ol>
+      </div>
+
+      <div class="footer-note">
+        No credentials were collected. This simulation is for internal security awareness and ISO 27001 evidence purposes only.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const TRACKER_URL = "https://script.google.com/macros/s/AKfycbzuAUFUNHcFcotMVOBKm4_umiPoQhcoDHYPNFo2ulnNqakHnjO8rIEss71P8Az4GJjY/exec";
+
+    function getParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name) || "";
+    }
+
+    const payload = new URLSearchParams({
+      campaign: getParam("campaign") || "Management Agreement Review Simulation",
+      email: getParam("email") || "Unknown",
+      name: getParam("name") || "",
+      department: getParam("department") || "",
+      link: getParam("link") || "management-agreement-review"
+    });
+
+    fetch(TRACKER_URL + "?" + payload.toString(), {
+      method: "GET",
+      mode: "no-cors"
+    }).catch(() => {
+      // Silent fail so the training page still loads even if logging is blocked.
+    });
+  </script>
+</body>
+</html>
